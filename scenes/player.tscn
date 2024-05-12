@@ -26,6 +26,7 @@ metadata/_edit_lock_ = true
 position = Vector2(-23, 3)
 scale = Vector2(1.004, 1.004)
 sprite_frames = SubResource("SpriteFrames_gu78g")
+frame_progress = 0.215508
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(9.99996, -99.9999)
