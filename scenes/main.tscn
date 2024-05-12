@@ -14,3 +14,5 @@ position = Vector2(390, 275)
 position = Vector2(567, 253)
 
 [node name="PlayerSpawnPosition" type="Marker2D" parent="."]
+
+[node name="LaserContainer" type="Node2D" parent="."]

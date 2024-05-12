@@ -29,3 +29,14 @@ frame_progress = 0.215508
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(9.99996, -99.9999)
 polygon = PackedVector2Array(-90, -480, -430, 480, -290, 480, -210, 220, 190, 220, 290, 480, 430, 480, 90, -480)
+
+[node name="gun1" type="Marker2D" parent="."]
+position = Vector2(0, -700)
+
+[node name="gun2" type="Marker2D" parent="."]
+position = Vector2(-400, 260)
+scale = Vector2(1, 1)
+
+[node name="gun3" type="Marker2D" parent="."]
+position = Vector2(400, 260)
+scale = Vector2(1, 1)
