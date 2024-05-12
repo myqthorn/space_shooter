@@ -23,3 +23,7 @@ func _on_area_2d_area_entered(_area):
 	#if area.get_parent() is Player:
 		#area.get_parent().die
 	pass
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	queue_free()

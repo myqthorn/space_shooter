@@ -13,6 +13,7 @@ var screen_size
 @export var offset = Vector2.ZERO
 @export var rotation_angle = PI / 64
 @export var three_guns = false
+@export var wrap_around = true
 @onready var gun1 = $gun1
 @onready var gun2 = $gun2
 @onready var gun3 = $gun3
@@ -41,6 +42,7 @@ func start(pos):
 func _physics_process(_delta):
 	handle_inputs()
 	move_and_slide()
+	wraparound()
 	handle_animations()
 
 func handle_inputs():
@@ -98,3 +100,9 @@ func die():
 	position = Vector2(screen_size.x/2, screen_size.y/2)
 	cur_angle = PI / 2
 	velocity = Vector2(0.0,0.0)
+
+func wraparound():
+	var size = get_viewport_rect().size
+	if wrap_around:
+		position.x = wrapf(position.x, 0, size.x)
+		position.y = wrapf(position.y, 0, size.y)
