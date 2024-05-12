@@ -1,5 +1,5 @@
-extends CharacterBody2D
-class_name Player
+class_name Player extends CharacterBody2D
+
 
 signal hit
 signal laser_shot(laser_scene, location, angle)
@@ -14,6 +14,8 @@ var screen_size
 @export var rotation_angle = PI / 64
 @export var three_guns = false
 @export var wrap_around = true
+@export var shoot_cooldown_time = 0.25
+
 @onready var gun1 = $gun1
 @onready var gun2 = $gun2
 @onready var gun3 = $gun3
@@ -25,6 +27,7 @@ var vel = 0.0
 var rot = 0.0
 
 var laser_scene = preload("res://scenes/laser.tscn")
+var shoot_cooldown := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,6 +43,7 @@ func start(pos):
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	screen_size =  get_viewport_rect().size
 	handle_inputs()
 	move_and_slide()
 	wraparound()
@@ -50,9 +54,12 @@ func handle_inputs():
 	vel = Input.get_axis("move_up", "move_down")
 	if Input.is_action_just_pressed("hyperspace"):
 		hyperspace()
-	if Input.is_action_just_pressed("shoot"):
-		shoot()
-	
+	if Input.is_action_pressed("shoot"):
+		if !shoot_cooldown:
+			shoot_cooldown = true
+			shoot()
+			await get_tree().create_timer(shoot_cooldown_time).timeout
+			shoot_cooldown = false
 	rotation_angle += angle * 0.1
 	rotation = rotation_angle
 	direction = Vector2.from_angle(rotation_angle + (PI / 2))
@@ -74,9 +81,8 @@ func handle_animations():
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 
 func hyperspace():
-	var size = get_viewport_rect().size
-	var x = randi_range(0.1 * size.x, 0.9 * size.x)
-	var y = randi_range(0.1 * size.y, 0.9 * size.y)
+	var x = randi_range(0.1 * screen_size.x, 0.9 * screen_size.x)
+	var y = randi_range(0.1 * screen_size.y, 0.9 * screen_size.y)
 	#TODO: check for collision
 	#TODO: set timer
 	position = Vector2(x,y)
@@ -100,9 +106,9 @@ func die():
 	position = Vector2(screen_size.x/2, screen_size.y/2)
 	cur_angle = PI / 2
 	velocity = Vector2(0.0,0.0)
+	print("Player die")
 
 func wraparound():
-	var size = get_viewport_rect().size
 	if wrap_around:
-		position.x = wrapf(position.x, 0, size.x)
-		position.y = wrapf(position.y, 0, size.y)
+		position.x = wrapf(position.x, 0, screen_size.x)
+		position.y = wrapf(position.y, 0, screen_size.y)

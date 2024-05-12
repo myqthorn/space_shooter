@@ -1,7 +1,9 @@
-extends Area2D
+class_name Laser extends Area2D
 
 @export var direction = Vector2(0.0, 0.0 )
 @export var speed = 600
+@export var damage = 100
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$Sprite2D.show()
@@ -13,3 +15,9 @@ func _physics_process(delta):
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
+
+
+func _on_area_entered(area):
+	if area is Tesla:
+		queue_free()
+		area.take_damage(damage)

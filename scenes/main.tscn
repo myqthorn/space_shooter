@@ -1,14 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://brre2cnhox4tx"]
+[gd_scene load_steps=3 format=3 uid="uid://brre2cnhox4tx"]
 
-[ext_resource type="PackedScene" uid="uid://2fwwsy18ulfh" path="res://scenes/tesla.tscn" id="1_gypsw"]
 [ext_resource type="Script" path="res://main.gd" id="1_k5rmy"]
 [ext_resource type="PackedScene" uid="uid://c4mcwx55impjt" path="res://scenes/player.tscn" id="2_ouo61"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_k5rmy")
-
-[node name="Tesla" parent="." instance=ExtResource("1_gypsw")]
-position = Vector2(390, 275)
 
 [node name="player" parent="." instance=ExtResource("2_ouo61")]
 position = Vector2(567, 253)
@@ -16,3 +12,5 @@ position = Vector2(567, 253)
 [node name="PlayerSpawnPosition" type="Marker2D" parent="."]
 
 [node name="LaserContainer" type="Node2D" parent="."]
+
+[node name="EnemyContainer" type="Node2D" parent="."]

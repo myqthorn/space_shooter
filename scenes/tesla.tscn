@@ -1,30 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://2fwwsy18ulfh"]
+[gd_scene load_steps=3 format=3 uid="uid://2fwwsy18ulfh"]
 
 [ext_resource type="Script" path="res://scripts/tesla.gd" id="1_mxjt1"]
 [ext_resource type="Texture2D" uid="uid://cvw5r6i4eyprn" path="res://assets/800px-Tesla_Roadster_mounted_on_Falcon_Heavy_upper_stage.png" id="1_rmw6v"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_4k25x"]
-radius = 67.2523
-height = 472.4
-
-[node name="Tesla" type="Node2D"]
+[node name="Tesla" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
 script = ExtResource("1_mxjt1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_rmw6v")
 
-[node name="Area2D" type="Area2D" parent="."]
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-39, -10)
-rotation = 0.418879
-shape = SubResource("CapsuleShape2D_4k25x")
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(-9.50001, -2.50001)
-scale = Vector2(15.55, 20.95)
+position = Vector2(-25.5, -7.50001)
+scale = Vector2(24.35, 26.15)
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-82, -111, -57, -141, -62, -173, -35, -192, 15, -198, 51, -212, 59, -191, 97, -185, 113, -162, 150, -200, 126, -122, 63, -72, -32, 131, -71, 147, -72, 185, -90, 204, -124, 208, -147, 180, -142, 146, -126, 131, -143, 90)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -2,14 +2,18 @@ extends Node2D
 
 @onready var player_spawn_pos = $PlayerSpawnPosition
 @onready var laser_container = $LaserContainer
+@onready var enemy_container = $EnemyContainer
 var player = null
 
+var tesla_scene = preload("res://scenes/tesla.tscn")
 
 func _ready():
 	player = get_tree().get_first_node_in_group("playerGroup")
 	$PlayerSpawnPosition.position = get_viewport_rect().get_center()
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shot.connect(_on_player_laser_shot)
+	var tesla = tesla_scene.instantiate()
+	enemy_container.add_child(tesla)
 
 func _process(_delta):
 	if Input.is_action_just_pressed("quit"):
