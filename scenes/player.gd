@@ -1,4 +1,5 @@
 extends Area2D
+class_name Player
 
 signal hit
 
@@ -35,11 +36,6 @@ func _process(delta):
 	handle_inputs()
 	move_player(delta)
 	handle_animations()
-	
-	
-
-	
-	
 
 func handle_inputs():	
 	rot = Input.get_axis("ui_left", "ui_right")
@@ -85,3 +81,8 @@ func _on_body_entered(_body):
 	hit.emit()
 	# Must be deferred as we can't change physics properties on a physics callback.
 	$CollisionShape2D.set_deferred("disabled", true)
+
+func die():
+	position = Vector2(screen_size.x/2, screen_size.y/2)
+	cur_angle = PI / 2
+	velocity = 0

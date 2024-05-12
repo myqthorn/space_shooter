@@ -1,7 +1,7 @@
 extends Node2D
 @export var direction = Vector2(0,0)
-@export var speed = 0
-@export var angular_velocity = 0
+@export var speed = 0.0
+@export var angular_velocity = 0.0
 
 func _ready():
 	if direction == Vector2(0,0):
@@ -17,3 +17,9 @@ func _ready():
 func _process(delta):
 	rotate(delta * angular_velocity)
 	position += delta * direction * speed
+
+
+func _on_area_2d_area_entered(area):
+	if area.get_parent() is Player:
+		area.get_parent().die
+	
