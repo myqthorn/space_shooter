@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4mcwx55impjt"]
+[gd_scene load_steps=4 format=3 uid="uid://c4mcwx55impjt"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_s4by0"]
 [ext_resource type="Texture2D" uid="uid://busc46nxwo7gp" path="res://assets/ship.png" id="2_tncyc"]
@@ -14,12 +14,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_i2lqp"]
-size = Vector2(860, 1000)
-
-[node name="player" type="Area2D"]
+[node name="player" type="CharacterBody2D"]
 scale = Vector2(0.05, 0.05)
-monitoring = false
+motion_mode = 1
 script = ExtResource("1_s4by0")
 metadata/_edit_lock_ = true
 
@@ -29,8 +26,6 @@ scale = Vector2(1.004, 1.004)
 sprite_frames = SubResource("SpriteFrames_gu78g")
 frame_progress = 0.215508
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(9.99996, -99.9999)
-shape = SubResource("RectangleShape2D_i2lqp")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+polygon = PackedVector2Array(-90, -480, -430, 480, -290, 480, -210, 220, 190, 220, 290, 480, 430, 480, 90, -480)
