@@ -15,6 +15,8 @@ var screen_size
 @export var three_guns = false
 @export var wrap_around = true
 @export var shoot_cooldown_time = 0.25
+@export var damage = 100
+@export var HP = 1200
 
 @onready var gun1 = $gun1
 @onready var gun2 = $gun2
@@ -42,10 +44,15 @@ func start(pos):
 
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
 	screen_size =  get_viewport_rect().size
 	handle_inputs()
-	move_and_slide()
+	#move_and_slide()
+	#var collision_info = move_and_collide((velocity * delta), false,0.00,true)
+	var collision_info = move_and_collide((velocity * delta))
+	if collision_info:
+		handle_collision(collision_info)
+	
 	wraparound()
 	handle_animations()
 
@@ -65,7 +72,16 @@ func handle_inputs():
 	direction = Vector2.from_angle(rotation_angle + (PI / 2))
 	velocity += direction * vel * speed
 
-
+func handle_collision(collision_info):
+	velocity = 0.5 * velocity.bounce(collision_info.get_normal())
+	var object = collision_info.get_collider()
+	if object is Tesla:
+		object.take_damage(damage)
+		take_damage(object.damage)
+		
+	
+	print("bounce")
+	
 func handle_animations():
 	if velocity == Vector2(0,0):
 		$AnimatedSprite2D.stop()
@@ -94,14 +110,20 @@ func shoot():
 		laser_shot.emit(laser_scene, gun2.global_position, rotation_angle)
 		laser_shot.emit(laser_scene, gun3.global_position, rotation_angle)
 	three_guns = !three_guns
-	
-func _on_body_entered(_body):
-	hide() # Player disappears after being hit.
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
-	print("Player Collision")
+	#
+#func _on_body_entered(_body):
+	#hide() # Player disappears after being hit.
+	#hit.emit()
+	## Must be deferred as we can't change physics properties on a physics callback.
+	#$CollisionShape2D.set_deferred("disabled", true)
+	#print("Player Collision")
 
+func take_damage(value):
+	HP -= value
+	print("Player HP:", HP)
+	if HP <= 0:
+		die()
+		
 func die():
 	position = Vector2(screen_size.x/2, screen_size.y/2)
 	cur_angle = PI / 2

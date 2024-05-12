@@ -18,6 +18,9 @@ animations = [{
 scale = Vector2(0.05, 0.05)
 collision_mask = 10
 motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294901760
+platform_wall_layers = 1
 script = ExtResource("1_s4by0")
 metadata/_edit_lock_ = true
 
@@ -36,8 +39,6 @@ position = Vector2(0, -700)
 
 [node name="gun2" type="Marker2D" parent="."]
 position = Vector2(-400, 260)
-scale = Vector2(1, 1)
 
 [node name="gun3" type="Marker2D" parent="."]
 position = Vector2(400, 260)
-scale = Vector2(1, 1)

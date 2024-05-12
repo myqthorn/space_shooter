@@ -3,9 +3,11 @@
 [ext_resource type="Script" path="res://scripts/tesla.gd" id="1_mxjt1"]
 [ext_resource type="Texture2D" uid="uid://cvw5r6i4eyprn" path="res://assets/800px-Tesla_Roadster_mounted_on_Falcon_Heavy_upper_stage.png" id="1_rmw6v"]
 
-[node name="Tesla" type="Area2D"]
+[node name="Tesla" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 4
+collision_mask = 5
+platform_floor_layers = 4294901760
+platform_wall_layers = 2
 script = ExtResource("1_mxjt1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -19,5 +21,4 @@ scale = Vector2(24.35, 26.15)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-82, -111, -57, -141, -62, -173, -35, -192, 15, -198, 51, -212, 59, -191, 97, -185, 113, -162, 150, -200, 126, -122, 63, -72, -32, 131, -71, 147, -72, 185, -90, 204, -124, 208, -147, 180, -142, 146, -126, 131, -143, 90)
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

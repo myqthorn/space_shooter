@@ -1,9 +1,10 @@
-class_name Tesla extends Area2D
+class_name Tesla extends CharacterBody2D
 
 @export var direction = Vector2(0,0)
 @export var speed = 0.0
 @export var angular_velocity = 0.0
 @export var HP = 1000
+@export var damage = 100
 
 func _ready():
 	if direction == Vector2(0,0):
@@ -47,7 +48,7 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 
 func _on_body_entered(body):
 	if body is Player:
-		body.die()
-		die()
+		body.take_damage(damage)
+		take_damage(body.damage)
 		
 	
