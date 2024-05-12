@@ -14,7 +14,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="player" type="CharacterBody2D"]
+[node name="player" type="CharacterBody2D" groups=["playerGroup"]]
 scale = Vector2(0.05, 0.05)
 motion_mode = 1
 script = ExtResource("1_s4by0")

@@ -19,9 +19,6 @@ var vel = 0.0
 var rot = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	screen_size = get_viewport_rect().size
-	position.x = screen_size.x/2
-	position.y = screen_size.y/2
 	#hide()
 	show()
 
@@ -32,24 +29,16 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	handle_inputs()
 	move_and_slide()
 	handle_animations()
 
 func handle_inputs():
-	var angle = Input.get_axis("ui_left", "ui_right")
-	if angle == 0.0:
-		if Input.is_action_pressed(move_right):
-			angle += 1
-		if Input.is_action_pressed(move_left):
-			angle -= 1
-	vel = Input.get_axis("ui_up", "ui_down")
-	if vel == 0.0:
-		if Input.is_action_pressed(move_down):
-			vel += 1
-		if Input.is_action_pressed(move_up):
-			vel -= 1
+	var angle = Input.get_axis("move_left", "move_right")
+	vel = Input.get_axis("move_up", "move_down")
+	if Input.is_action_just_pressed("hyperspace"):
+		hyperspace()
 	
 	
 	rotation_angle += angle * 0.1
@@ -71,6 +60,15 @@ func handle_animations():
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "default"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
+
+func hyperspace():
+	var size = get_viewport_rect().size
+	var x = randi_range(0.1 * size.x, 0.9 * size.x)
+	var y = randi_range(0.1 * size.y, 0.9 * size.y)
+	#TODO: check for collision
+	#TODO: set timer
+	position = Vector2(x,y)
+	velocity = Vector2(0,0)
 
 func _on_body_entered(_body):
 	hide() # Player disappears after being hit.

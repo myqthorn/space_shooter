@@ -12,3 +12,5 @@ position = Vector2(390, 275)
 
 [node name="player" parent="." instance=ExtResource("2_ouo61")]
 position = Vector2(567, 253)
+
+[node name="PlayerSpawnPosition" type="Marker2D" parent="."]
