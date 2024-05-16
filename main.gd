@@ -23,9 +23,11 @@ func _process(_delta):
 		get_tree().quit()
 	elif Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
-	$HealthBar.max_value = $player.HP_max
-	$HealthBar.value = $player.HP	
-	$Score.text =str(score)
+	$CanvasLayer/HealthBar.max_value = $player.HP_max
+	$CanvasLayer/TextureHealthBar.max_value = $player.HP_max
+	$CanvasLayer/HealthBar.value = $player.HP
+	$CanvasLayer/TextureHealthBar.value = $player.HP
+	$CanvasLayer/Score.text =str(score)
 	
 func _on_player_laser_shot(laser_scene, location, angle):
 	var laser = laser_scene.instantiate()

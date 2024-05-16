@@ -14,6 +14,7 @@ var screen_size
 @export var rotation_angle = PI / 64
 @export var three_guns = false
 @export var wrap_around = true
+@export var power_up = false
 @export var shoot_cooldown_time = 0.25
 @export var damage = 100
 @export var HP = 1200
@@ -22,6 +23,7 @@ var screen_size
 @onready var gun1 = $gun1
 @onready var gun2 = $gun2
 @onready var gun3 = $gun3
+
 #var velocity
 var direction = Vector2(0,0)
 var cur_angle = PI / 2
@@ -53,6 +55,7 @@ func _physics_process(delta):
 	handle_inputs()
 	#move_and_slide()
 	#var collision_info = move_and_collide((velocity * delta), false,0.00,true)
+	handle_powerups(delta)
 	var collision_info = move_and_collide((velocity * delta))
 	if collision_info:
 		handle_collision(collision_info)
@@ -76,6 +79,11 @@ func handle_inputs():
 	direction = Vector2.from_angle(rotation_angle + (PI / 2))
 	velocity += direction * vel * speed
 
+	if Input.is_action_pressed("powerup"):
+		power_up = true
+		shoot()
+		await get_tree().create_timer(2).timeout
+		power_up = false
 func handle_collision(collision_info):
 	velocity = 0.5 * velocity.bounce(collision_info.get_normal())
 	var object = collision_info.get_collider()
@@ -99,7 +107,12 @@ func handle_animations():
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "default"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
-
+func handle_powerups(delta):
+	if power_up:
+		rotation_angle += delta * 50
+		await get_tree().create_timer(.25).timeout
+		shoot()
+		
 func hyperspace():
 	var x = randi_range(0.1 * screen_size.x, 0.9 * screen_size.x)
 	var y = randi_range(0.1 * screen_size.y, 0.9 * screen_size.y)

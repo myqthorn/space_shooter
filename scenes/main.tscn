@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://brre2cnhox4tx"]
+[gd_scene load_steps=5 format=3 uid="uid://brre2cnhox4tx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_k5rmy"]
 [ext_resource type="PackedScene" uid="uid://c4mcwx55impjt" path="res://scenes/player.tscn" id="2_ouo61"]
@@ -8,6 +8,8 @@ particles_animation = true
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3r8h1"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_k5rmy")
@@ -21,18 +23,35 @@ position = Vector2(567, 253)
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
-[node name="HealthBar" type="ProgressBar" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" type="ProgressBar" parent="CanvasLayer"]
 material = SubResource("CanvasItemMaterial_8t7g5")
 offset_right = 131.0
 offset_bottom = 27.0
 size_flags_horizontal = 8
+show_percentage = false
 
-[node name="Score" type="Label" parent="."]
+[node name="Score" type="Label" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = 1077.0
+offset_left = -75.0
 offset_top = 2.0
-offset_right = 1151.0
+offset_right = -1.0
 offset_bottom = 25.0
 grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0.956863, 0, 1)
+theme_override_colors/font_outline_color = Color(0.692215, 0.828166, 0.207317, 1)
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 2
+
+[node name="TextureHealthBar" type="TextureProgressBar" parent="CanvasLayer"]
+offset_left = 2.0
+offset_top = 43.0
+offset_right = 258.0
+offset_bottom = 44.0
+scale = Vector2(1, 20)
+size_flags_stretch_ratio = 0.0
+texture_progress = SubResource("GradientTexture1D_3r8h1")
+tint_progress = Color(0.666667, 0, 0, 0.517647)
