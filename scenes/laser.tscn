@@ -19,6 +19,7 @@ texture = ExtResource("2_k0p5x")
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0.503377, -16.0331)
 shape = SubResource("CapsuleShape2D_mutm6")
 metadata/_edit_lock_ = true

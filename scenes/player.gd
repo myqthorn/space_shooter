@@ -17,6 +17,7 @@ var screen_size
 @export var shoot_cooldown_time = 0.25
 @export var damage = 100
 @export var HP = 1200
+@export var HP_max = 1200
 
 @onready var gun1 = $gun1
 @onready var gun2 = $gun2
@@ -29,13 +30,16 @@ var vel = 0.0
 var rot = 0.0
 
 var laser_scene = preload("res://scenes/laser.tscn")
+var health_bar = preload("res://scenes/health_bar.tscn")
+var health_bar_scene
 var shoot_cooldown := false
+var health_bar_timeout = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#hide()
 	show()
-
+	health_bar_scene = health_bar.instantiate()
 
 func start(pos):
 	position = pos
@@ -123,6 +127,13 @@ func take_damage(value):
 	print("Player HP:", HP)
 	if HP <= 0:
 		die()
+	else:
+		#health_bar_scene.$ProgressBar.value = HP
+		#health_bar_scene.max_value = HP_max
+		health_bar_scene
+		health_bar_scene.show()
+		
+		
 		
 func die():
 	position = Vector2(screen_size.x/2, screen_size.y/2)

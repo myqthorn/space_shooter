@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://2fwwsy18ulfh"]
+[gd_scene load_steps=3 format=3 uid="uid://nd1dtb85ait7"]
 
 [ext_resource type="Script" path="res://scripts/tesla.gd" id="1_mxjt1"]
 [ext_resource type="Texture2D" uid="uid://cvw5r6i4eyprn" path="res://assets/800px-Tesla_Roadster_mounted_on_Falcon_Heavy_upper_stage.png" id="1_rmw6v"]

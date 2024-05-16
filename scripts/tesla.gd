@@ -1,10 +1,14 @@
 class_name Tesla extends CharacterBody2D
 
+signal tesla_destroyed
 @export var direction = Vector2(0,0)
 @export var speed = 0.0
 @export var angular_velocity = 0.0
 @export var HP = 1000
 @export var damage = 100
+@export var wrap_around = true
+@export var point_value = 150
+var screen_size
 
 func _ready():
 	if direction == Vector2(0,0):
@@ -22,8 +26,10 @@ func _ready():
 	position = Vector2(x,y)
 
 func _process(delta):
+	screen_size =  get_viewport_rect().size
 	rotate(delta * angular_velocity)
 	position += delta * direction * speed
+	wraparound()
 
 func take_damage(value):
 	HP -= value
@@ -34,6 +40,7 @@ func take_damage(value):
 func die():
 	queue_free()
 	print("Tesla die")
+	tesla_destroyed.emit(point_value)
 
 func _on_area_2d_area_entered(_area):
 	#if area.get_parent() is Player:
@@ -51,4 +58,7 @@ func _on_body_entered(body):
 		body.take_damage(damage)
 		take_damage(body.damage)
 		
-	
+func wraparound():
+	if wrap_around:
+		position.x = wrapf(position.x, -200, screen_size.x + 200)
+		position.y = wrapf(position.y, -200, screen_size.y + 200)
