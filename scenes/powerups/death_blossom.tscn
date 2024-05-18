@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://br5ejx68darom"]
+
+[ext_resource type="Script" path="res://scenes/powerups/death_blossom.gd" id="1_y8s2k"]
+
+[node name="DeathBlossom" type="Node2D"]
+script = ExtResource("1_y8s2k")
+
+[node name="ActionTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

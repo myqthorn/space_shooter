@@ -20,7 +20,7 @@ func _ready():
 
 	if angular_velocity == 0:
 		angular_velocity = randf_range(-1.0, 1.0)
-	var screen_size = get_viewport_rect().size
+	screen_size = get_viewport_rect().size
 	var x = randi_range(0.1 * screen_size.x, 0.9 * screen_size.x)
 	var y = randi_range(0.1 * screen_size.y, 0.9 * screen_size.y)
 	position = Vector2(x,y)

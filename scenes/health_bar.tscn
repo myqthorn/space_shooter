@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://b75ssm7hol7hy"]
+
+[ext_resource type="Script" path="res://scripts/health_bar.gd" id="1_pncxu"]
+
+[node name="HealthBar" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pncxu")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_right = 139.0
+offset_bottom = 27.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

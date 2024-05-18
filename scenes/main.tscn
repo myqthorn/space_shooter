@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://brre2cnhox4tx"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_k5rmy"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_ygjmb"]
 [ext_resource type="PackedScene" uid="uid://c4mcwx55impjt" path="res://scenes/player.tscn" id="2_ouo61"]
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_3r8h1"]
@@ -11,7 +11,7 @@
 gradient = SubResource("Gradient_5otu7")
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_k5rmy")
+script = ExtResource("1_ygjmb")
 
 [node name="player" parent="." instance=ExtResource("2_ouo61")]
 position = Vector2(567, 253)

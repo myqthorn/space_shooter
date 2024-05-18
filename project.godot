@@ -87,6 +87,7 @@ powerup={
 2d_physics/layer_2="enemy_layer"
 2d_physics/layer_3="laser_layer"
 2d_physics/layer_4="enemy_laser_layer"
+2d_physics/layer_5="loose_power_up_layer"
 
 [rendering]
 

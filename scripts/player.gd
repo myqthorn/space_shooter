@@ -50,9 +50,9 @@ var powerup_list
 func _ready():
 	#hide()
 	show()
-	for item in available_powerups:		
-		powerup_scene = item.instantiate()
-		$PowerupContainer.add_child(powerup_scene)
+	#for item in available_powerups:		
+		#powerup_scene = item.instantiate()
+		#$PowerupContainer.add_child(powerup_scene)
 		
 		
 
@@ -100,6 +100,8 @@ func handle_collision(collision_info):
 	if object is Tesla:
 		object.take_damage(damage)
 		take_damage(object.damage)
+	if object is LoosePowerUp:
+		add_random_power_up()
 
 
 func handle_animations():
@@ -168,3 +170,15 @@ func on_time_left(time_left, max):
 	print("on_time_left")
 	powerup_time_remaining = time_left
 	powerup_max_time = max
+
+
+func add_random_power_up():
+	var index = randi_range(0, available_powerups.size() - 1)
+	powerup_scene = available_powerups[index].instantiate()
+	$PowerupContainer.add_child(powerup_scene)
+
+
+func add_power_up(type):
+	if type <= available_powerups.size():
+		powerup_scene = available_powerups[type].instantiate()
+		$PowerupContainer.add_child(powerup_scene)
