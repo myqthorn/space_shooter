@@ -42,3 +42,7 @@ position = Vector2(-400, 260)
 
 [node name="gun3" type="Marker2D" parent="."]
 position = Vector2(400, 260)
+
+[node name="PowerupContainer" type="Container" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

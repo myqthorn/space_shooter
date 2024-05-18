@@ -6,8 +6,10 @@ extends Node2D
 var player = null
 var score = 0
 var tesla_scene = preload("res://scenes/tesla.tscn")
+@export var screen_size = get_viewport_rect().size
 
 func _ready():
+	screen_size = get_viewport_rect().size
 	player = get_tree().get_first_node_in_group("playerGroup")
 	$PlayerSpawnPosition.position = get_viewport_rect().get_center()
 	player.global_position = player_spawn_pos.global_position
@@ -19,16 +21,17 @@ func _ready():
 	tesla.tesla_destroyed.connect(_on_tesla_destroyed)
 	
 func _process(_delta):
+	screen_size =  get_viewport_rect().size
 	if Input.is_action_just_pressed("quit"):
 		get_tree().quit()
 	elif Input.is_action_just_pressed("reset"):
 		get_tree().reload_current_scene()
-	$CanvasLayer/HealthBar.max_value = $player.HP_max
 	$CanvasLayer/TextureHealthBar.max_value = $player.HP_max
-	$CanvasLayer/HealthBar.value = $player.HP
 	$CanvasLayer/TextureHealthBar.value = $player.HP
 	$CanvasLayer/Score.text =str(score)
-	
+	$CanvasLayer/PowerUpDurationBar.value = $player.powerup_time_remaining * 100
+	$CanvasLayer/PowerUpDurationBar.max_value = $player.powerup_max_time * 100
+
 func _on_player_laser_shot(laser_scene, location, angle):
 	var laser = laser_scene.instantiate()
 	laser.global_position = location
@@ -39,3 +42,7 @@ func _on_player_laser_shot(laser_scene, location, angle):
 func _on_tesla_destroyed(points):
 	score += points
 	
+
+
+
+
