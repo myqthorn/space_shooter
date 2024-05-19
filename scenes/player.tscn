@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4mcwx55impjt"]
+[gd_scene load_steps=5 format=3 uid="uid://c4mcwx55impjt"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_5s62i"]
 [ext_resource type="Texture2D" uid="uid://busc46nxwo7gp" path="res://assets/ship.png" id="2_tncyc"]
+[ext_resource type="AudioStream" uid="uid://cnm8udgdevu5w" path="res://assets/Audio/thrust5.wav" id="3_m5kp3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gu78g"]
 animations = [{
@@ -46,3 +47,6 @@ position = Vector2(400, 260)
 [node name="PowerupContainer" type="Container" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Thrust" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_m5kp3")

@@ -8,6 +8,7 @@ func _ready():
 func begin():
 	super.begin()
 	parent.num_guns = 3
+	
 
 func start_duration_timer():
 	print("PU setup_duration_timer")

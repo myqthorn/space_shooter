@@ -77,6 +77,9 @@ func _physics_process(delta):
 func handle_inputs():
 	var angle = Input.get_axis("move_left", "move_right")
 	vel = Input.get_axis("move_up", "move_down")
+	if angle || vel:
+		if !$Thrust.playing:
+			$Thrust.play()
 	if Input.is_action_just_pressed("hyperspace"):
 		hyperspace()
 	if Input.is_action_pressed("shoot"):
