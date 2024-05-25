@@ -1,8 +1,10 @@
 class_name DeathBlossom extends Powerup
 
+
+
 func _ready():
 	super._ready()
-	powerup_duration = 3.0
+	
 
 func begin():
 	super.begin()

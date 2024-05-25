@@ -48,5 +48,9 @@ position = Vector2(400, 260)
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="PassivePowerupContainer" type="Container" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Thrust" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_m5kp3")

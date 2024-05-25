@@ -178,7 +178,14 @@ func on_time_left(time_left, max):
 func add_random_power_up():
 	var index = randi_range(0, available_powerups.size() - 1)
 	powerup_scene = available_powerups[index].instantiate()
-	$PowerupContainer.add_child(powerup_scene)
+	
+	if powerup_scene.is_passive:
+		$PassivePowerupContainer.add_child(powerup_scene)
+		powerup_scene.begin()
+		powerup_scene.connect("powerup_time_left", on_time_left)
+		
+	else:
+		$PowerupContainer.add_child(powerup_scene)
 
 
 func add_power_up(type):

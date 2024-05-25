@@ -4,6 +4,7 @@
 
 [node name="DeathBlossom" type="Node2D"]
 script = ExtResource("1_y8s2k")
+powerup_duration = 3.0
 
 [node name="ActionTimer" type="Timer" parent="."]
 wait_time = 0.1

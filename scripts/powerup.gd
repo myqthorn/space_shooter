@@ -4,8 +4,11 @@ signal powerup_time_left
 
 var is_powerup_active = false
 var parent
-var powerup_duration = 1.0
+@export var powerup_duration = 1.0
 var duration_timer = 0
+@export var is_passive = false
+
+
 enum powerup_type {
 	Powerup_Death_Blossom,
 	Powerup_3_Guns,
@@ -16,6 +19,7 @@ func _ready():
 	print("PU Ready")
 	parent = get_parent().get_parent()
 	is_powerup_active = false
+	
 
 func _process(_delta):
 	if is_powerup_active && duration_timer:
@@ -25,7 +29,7 @@ func _process(_delta):
 func begin():
 	print("PU setup")
 	if !is_powerup_active:
-		var main = parent.get_parent()
+		#var main = parent.get_parent()
 		#parent.connect("powerup_time_left", parent.on_time_left)
 		#print("connect")
 		is_powerup_active = true

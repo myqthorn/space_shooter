@@ -3,7 +3,9 @@ class_name ThreeGuns extends Powerup
 
 func _ready():
 	super._ready()
-	powerup_duration = 4.0
+	
+	
+	
 
 func begin():
 	super.begin()
