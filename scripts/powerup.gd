@@ -12,6 +12,7 @@ var duration_timer = 0
 enum powerup_type {
 	Powerup_Death_Blossom,
 	Powerup_3_Guns,
+	Powerup_Rapid_Fire,
 }
 
 # Called when the node enters the scene tree for the first time.

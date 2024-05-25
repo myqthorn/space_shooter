@@ -36,7 +36,8 @@ var laser_scene = preload("res://scenes/laser.tscn")
 #var powerup = preload("res://scenes/powerups/death_blossom.tscn")
 var available_powerups = [
 	preload("res://scenes/powerups/death_blossom.tscn"),
-	preload("res://scenes/powerups/3_guns.tscn")
+	preload("res://scenes/powerups/3_guns.tscn"),
+	preload("res://scenes/powerups/rapid_fire.tscn")
 	]
 var powerup_scene
 @export var powerup_max_time = 0.0
@@ -105,7 +106,10 @@ func handle_collision(collision_info):
 		take_damage(object.damage)
 	if object is LoosePowerUp:
 		add_random_power_up()
-
+	if object is Player:
+		object.take_damage(damage)
+		take_damage(object.damage)
+		print("i hit my other player")
 
 func handle_animations():
 	if velocity == Vector2(0,0):
@@ -137,6 +141,9 @@ func hyperspace():
 	var x = randi_range(0.1 * get_parent().screen_size.x, 0.9 * get_parent().screen_size.x)
 	var y = randi_range(0.1 * get_parent().screen_size.y, 0.9 * get_parent().screen_size.y)
 	#TODO: check for collision
+	
+	
+	
 	#TODO: set timer
 	position = Vector2(x,y)
 	velocity = Vector2(0,0)
@@ -170,7 +177,6 @@ func wraparound():
 
 
 func on_time_left(time_left, max):
-	print("on_time_left")
 	powerup_time_remaining = time_left
 	powerup_max_time = max
 
