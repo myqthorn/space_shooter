@@ -33,14 +33,13 @@ var rot = 0.0
 
 var laser_scene = preload("res://scenes/laser.tscn")
 
-#var powerup = preload("res://scenes/powerups/death_blossom.tscn")
 var available_powerups = [
 	preload("res://scenes/powerups/death_blossom.tscn"),
 	preload("res://scenes/powerups/3_guns.tscn"),
 	preload("res://scenes/powerups/rapid_fire.tscn")
 	]
 var powerup_scene
-@export var powerup_max_time = 0.0
+@export var powerup_max_time = 1.0
 @export var powerup_time_remaining = 0.0
 
 var shoot_cooldown := false

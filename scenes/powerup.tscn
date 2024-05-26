@@ -102,3 +102,5 @@ script = ExtResource("1_vg02a")
 sprite_frames = SubResource("SpriteFrames_xsymi")
 frame_progress = 0.650894
 offset = Vector2(64, 0)
+
+[node name="HUDImage" type="Sprite2D" parent="."]

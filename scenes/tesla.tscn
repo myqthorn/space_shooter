@@ -11,7 +11,7 @@ platform_wall_layers = 2
 script = ExtResource("1_mxjt1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_rmw6v")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
@@ -19,6 +19,7 @@ position = Vector2(-25.5, -7.50001)
 scale = Vector2(24.35, 26.15)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(-82, -111, -57, -141, -62, -173, -35, -192, 15, -198, 51, -212, 59, -191, 97, -185, 113, -162, 150, -200, 126, -122, 63, -72, -32, 131, -71, 147, -72, 185, -90, 204, -124, 208, -147, 180, -142, 146, -126, 131, -143, 90)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -7,7 +7,7 @@ var parent
 @export var powerup_duration = 1.0
 var duration_timer = 0
 @export var is_passive = false
-
+var hud_image
 
 enum powerup_type {
 	Powerup_Death_Blossom,
@@ -20,7 +20,7 @@ func _ready():
 	print("PU Ready")
 	parent = get_parent().get_parent()
 	is_powerup_active = false
-	
+	hud_image = $HUDImage
 
 func _process(_delta):
 	if is_powerup_active && duration_timer:
@@ -43,5 +43,6 @@ func start_duration_timer():
 	is_powerup_active = false
 	queue_free()
 	
-	
+func assignHudImage(image):
+	hud_image = image
 	

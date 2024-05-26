@@ -57,7 +57,7 @@ func handle_gui():
 	$CanvasLayer/Score.text =str(score)
 	$CanvasLayer/PowerUpDurationBar.value = $player.powerup_time_remaining * 100
 	$CanvasLayer/PowerUpDurationBar.max_value = $player.powerup_max_time * 100
-
+	
 
 #func loose_pu_attained(player):
 	#player.add_random_power_up()
