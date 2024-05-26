@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://br5ejx68darom"]
 
-[ext_resource type="Script" path="res://scenes/powerups/death_blossom.gd" id="1_y8s2k"]
+[ext_resource type="Script" path="res://scripts/powerups/death_blossom.gd" id="1_rr80d"]
 
 [node name="DeathBlossom" type="Node2D"]
-script = ExtResource("1_y8s2k")
+script = ExtResource("1_rr80d")
 powerup_duration = 3.0
 
 [node name="ActionTimer" type="Timer" parent="."]

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://g1kqx6xvr618"]
+[gd_scene load_steps=2 format=3 uid="uid://b5a24tvfw73xo"]
 
 [ext_resource type="Script" path="res://scripts/powerups/rapid_fire.gd" id="1_qdka0"]
 
 [node name="RapidFire" type="Node2D"]
 script = ExtResource("1_qdka0")
+powerup_duration = 6.0
+is_passive = true
