@@ -1,14 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://c4mcwx55impjt"]
+[gd_scene load_steps=7 format=3 uid="uid://c4mcwx55impjt"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_5s62i"]
 [ext_resource type="Texture2D" uid="uid://busc46nxwo7gp" path="res://assets/ship.png" id="2_tncyc"]
 [ext_resource type="AudioStream" uid="uid://cnm8udgdevu5w" path="res://assets/Audio/thrust5.wav" id="3_m5kp3"]
+[ext_resource type="Texture2D" uid="uid://b7d4st4l32ofn" path="res://assets/Images/shield.png" id="4_5vjqw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gu78g"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_tncyc")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hjws7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5vjqw")
 }],
 "loop": true,
 "name": &"default",
@@ -54,3 +66,14 @@ offset_bottom = 40.0
 
 [node name="Thrust" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_m5kp3")
+
+[node name="ShieldBody" type="CharacterBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ShieldBody"]
+polygon = PackedVector2Array(0, 0)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ShieldBody"]
+position = Vector2(-20, 0)
+rotation = 0.785398
+scale = Vector2(25, 25)
+sprite_frames = SubResource("SpriteFrames_hjws7")

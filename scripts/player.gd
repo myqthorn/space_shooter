@@ -37,7 +37,8 @@ var laser_scene = preload("res://scenes/laser.tscn")
 var available_powerups = [
 	preload("res://scenes/powerups/death_blossom.tscn"),
 	preload("res://scenes/powerups/3_guns.tscn"),
-	preload("res://scenes/powerups/rapid_fire.tscn")
+	preload("res://scenes/powerups/rapid_fire.tscn"),
+	preload("res://scenes/powerups/shield.tscn"),
 	]
 var powerup_scene
 @export var powerup_max_time = 1.0
