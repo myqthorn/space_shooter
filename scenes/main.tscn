@@ -50,6 +50,6 @@ offset_left = 3.0
 offset_top = 100.0
 offset_right = 67.0
 offset_bottom = 164.0
-fill_mode = 8
+fill_mode = 5
 texture_progress = ExtResource("6_y17ss")
 tint_progress = Color(1, 1, 1, 0.466667)

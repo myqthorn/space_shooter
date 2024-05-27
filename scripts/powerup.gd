@@ -1,11 +1,12 @@
 class_name Powerup extends Node2D
 
 signal powerup_time_left
+signal end_powerup
 
 var is_powerup_active = false
 var parent
 @export var powerup_duration = 1.0
-var duration_timer = 0
+var duration_timer = 1.0
 @export var is_passive = false
 var hud_image
 
@@ -21,6 +22,7 @@ func _ready():
 	parent = get_parent().get_parent()
 	is_powerup_active = false
 	hud_image = $HUDImage
+	$HUDImage.hide()
 
 func _process(_delta):
 	if is_powerup_active && duration_timer:
@@ -40,10 +42,13 @@ func start_duration_timer():
 	print("PU setup_duration_timer")
 	duration_timer = get_tree().create_timer(powerup_duration)
 	await duration_timer.timeout
+
 	is_powerup_active = false
 	queue_free()
+	end_powerup.emit()
 	
 func assignHudImage(image):
 	hud_image = image
 	print("powerup.assignHudImage")
+	
 	

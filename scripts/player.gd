@@ -125,19 +125,36 @@ func handle_animations():
 	elif velocity.y != 0:
 		$AnimatedSprite2D.animation = "default"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
-
-
+	
+		
 func activate_powerup():
 	powerup_list = $PowerupContainer.get_children()
 	if powerup_list && powerup_list[0]:
-		if !powerup_list[0].is_powerup_active:
+		if !powerup_list[0].is_powerup_active && !powerup_list[0].is_passive:
 			powerup_list[0].begin()
+			set_next_hud_powerup()
 			#connect(powerup_list[0].powerup_time_left, on_time_left)
-			powerup_list[0].connect("powerup_time_left", on_time_left)
-			main.AssignHUDImage(powerup_list[0].hud_image)
 		
 
-
+func set_next_hud_powerup():
+	print("set_next_hud_powerup")
+	powerup_list = $PowerupContainer.get_children()
+	print("powerup_list", powerup_list)
+	var powerup_found = false
+	for powerup in powerup_list:
+		if !powerup.is_queued_for_deletion():
+			print(powerup, powerup.is_powerup_active, powerup.is_passive)
+			main.AssignHUDImage(powerup.hud_image.texture)
+			if !powerup.is_powerup_active:
+				on_time_left(1,1)
+			print("connect on_time_left to powerup: ", powerup)
+			powerup.powerup_time_left.connect(on_time_left)
+			powerup_found = true
+			break
+	if !powerup_found:
+		on_time_left(0,1)
+		main.AssignHUDImage(null)
+			
 func hyperspace():
 	var x = randi_range(0.1 * get_parent().screen_size.x, 0.9 * get_parent().screen_size.x)
 	var y = randi_range(0.1 * get_parent().screen_size.y, 0.9 * get_parent().screen_size.y)
@@ -177,23 +194,23 @@ func wraparound():
 		position.y = wrapf(position.y, 0, get_parent().screen_size.y)
 
 
-func on_time_left(time_left, max):
+func on_time_left(time_left, max_val):
+	print("on_time_left", time_left, ", ", max_val)
 	powerup_time_remaining = time_left
-	powerup_max_time = max
+	powerup_max_time = max_val
 
 
 func add_random_power_up():
 	var index = randi_range(0, available_powerups.size() - 1)
 	powerup_scene = available_powerups[index].instantiate()
 	
+	$PowerupContainer.add_child(powerup_scene)
+	set_next_hud_powerup()
+	powerup_scene.end_powerup.connect(set_next_hud_powerup)
+	
 	if powerup_scene.is_passive:
-		$PassivePowerupContainer.add_child(powerup_scene)
 		powerup_scene.begin()
-		powerup_scene.connect("powerup_time_left", on_time_left)
-		
-	else:
-		$PowerupContainer.add_child(powerup_scene)
-		get_parent().AssignHUDImage(powerup_scene.hud_image)
+
 
 func add_power_up(type):
 	if type <= available_powerups.size():

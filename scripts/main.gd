@@ -65,7 +65,8 @@ func handle_gui():
 	
 func AssignHUDImage(image):
 	duration_bar.texture_over = image
-	
-
 	print("see the under texture?")
 
+func clear_hud_powerup():
+	AssignHUDImage(null)
+	duration_bar.value = 0

@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://7jwd5p68bp2f"]
+[gd_scene load_steps=3 format=3 uid="uid://7jwd5p68bp2f"]
 
 [ext_resource type="Script" path="res://scripts/powerups/shield.gd" id="1_8y6yc"]
+[ext_resource type="Texture2D" uid="uid://b7d4st4l32ofn" path="res://assets/Images/shield.png" id="2_wfdvu"]
 
 [node name="Shield" type="Node2D"]
 script = ExtResource("1_8y6yc")
+
+[node name="HUDImage" type="Sprite2D" parent="."]
+texture = ExtResource("2_wfdvu")
