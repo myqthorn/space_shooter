@@ -3,7 +3,7 @@ class_name ThreeGuns extends Powerup
 
 func _ready():
 	super._ready()
-	
+	assignHudImage($HUDImage)
 	
 	
 

@@ -45,4 +45,5 @@ func start_duration_timer():
 	
 func assignHudImage(image):
 	hud_image = image
+	print("powerup.assignHudImage")
 	

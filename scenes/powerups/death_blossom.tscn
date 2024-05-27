@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://br5ejx68darom"]
+[gd_scene load_steps=3 format=3 uid="uid://br5ejx68darom"]
 
 [ext_resource type="Script" path="res://scripts/powerups/death_blossom.gd" id="1_rr80d"]
+[ext_resource type="Texture2D" uid="uid://lspierunyfog" path="res://assets/Images/powerups/powerup_death_blossom2.png" id="2_rykw0"]
 
 [node name="DeathBlossom" type="Node2D"]
 script = ExtResource("1_rr80d")
@@ -8,5 +9,8 @@ powerup_duration = 3.0
 
 [node name="ActionTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="HUDImage" type="Sprite2D" parent="."]
+texture = ExtResource("2_rykw0")
 
 [connection signal="timeout" from="ActionTimer" to="." method="_on_action_timer_timeout"]

@@ -6,7 +6,7 @@ class_name RapidFire extends Powerup
 func _ready():
 	super._ready()
 	print("rapid fire")
-	
+	assignHudImage($HUDImage)
 
 func begin():
 	super.begin()
@@ -17,5 +17,5 @@ func start_duration_timer():
 	print("rapid fire PU setup_duration_timer")
 	duration_timer = get_tree().create_timer(powerup_duration)
 	await duration_timer.timeout
-	parent.shoot_cooldown_time = 0.25
+	parent.reset_shoot_cooldown_time()
 	queue_free()

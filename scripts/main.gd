@@ -3,6 +3,7 @@ extends Node2D
 @onready var player_spawn_pos = $PlayerSpawnPosition
 @onready var laser_container = $LaserContainer
 @onready var enemy_container = $EnemyContainer
+@onready var duration_bar = $CanvasLayer/PowerUpDurationBar
 var player = null
 var score = 0
 var tesla_scene = preload("res://scenes/tesla.tscn")
@@ -55,12 +56,16 @@ func handle_gui():
 	$CanvasLayer/TextureHealthBar.max_value = $player.HP_max
 	$CanvasLayer/TextureHealthBar.value = $player.HP
 	$CanvasLayer/Score.text =str(score)
-	$CanvasLayer/PowerUpDurationBar.value = $player.powerup_time_remaining * 100
-	$CanvasLayer/PowerUpDurationBar.max_value = $player.powerup_max_time * 100
+	duration_bar.value = $player.powerup_time_remaining * 100
+	duration_bar.max_value = $player.powerup_max_time * 100
 	
 
 #func loose_pu_attained(player):
 	#player.add_random_power_up()
 	
+func AssignHUDImage(image):
+	duration_bar.texture_over = image
 	
+
+	print("see the under texture?")
 

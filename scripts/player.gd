@@ -15,7 +15,8 @@ signal laser_shot(laser_scene, location, angle)
 @export var num_guns = 1
 @export var wrap_around = true
 @export var power_up = false
-@export var shoot_cooldown_time = 0.25
+var default_shoot_cooldown_time = 0.5
+@export var shoot_cooldown_time = 0.5
 @export var damage = 100
 @export var HP = 1200
 @export var HP_max = 1200
@@ -23,7 +24,7 @@ signal laser_shot(laser_scene, location, angle)
 @onready var gun1 = $gun1
 @onready var gun2 = $gun2
 @onready var gun3 = $gun3
-
+@onready var main = $".."
 #var velocity
 var direction = Vector2(0,0)
 var cur_angle = PI / 2
@@ -132,7 +133,7 @@ func activate_powerup():
 			powerup_list[0].begin()
 			#connect(powerup_list[0].powerup_time_left, on_time_left)
 			powerup_list[0].connect("powerup_time_left", on_time_left)
-		
+			main.AssignHUDImage(powerup_list[0].hud_image)
 		
 
 
@@ -191,9 +192,12 @@ func add_random_power_up():
 		
 	else:
 		$PowerupContainer.add_child(powerup_scene)
-
+		get_parent().AssignHUDImage(powerup_scene.hud_image)
 
 func add_power_up(type):
 	if type <= available_powerups.size():
 		powerup_scene = available_powerups[type].instantiate()
 		$PowerupContainer.add_child(powerup_scene)
+
+func reset_shoot_cooldown_time():
+	shoot_cooldown_time = default_shoot_cooldown_time
