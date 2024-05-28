@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://wn8dop0k52x8"]
+
+[ext_resource type="Script" path="res://scripts/spacejunk/canadian_space_x.gd" id="1_tnek7"]
+[ext_resource type="Texture2D" uid="uid://dhbk08ss7e88x" path="res://assets/Images/canada_spaceX.png" id="2_0rjlc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qi776"]
+radius = 20.0
+height = 60.0
+
+[node name="CanadianSpaceX" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 39
+motion_mode = 1
+wall_min_slide_angle = 0.0
+platform_floor_layers = 4294901760
+script = ExtResource("1_tnek7")
+HP = 500
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_0rjlc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qi776")

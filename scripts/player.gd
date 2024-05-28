@@ -4,7 +4,8 @@ class_name Player extends CharacterBody2D
 signal hit
 signal laser_shot(laser_scene, location, angle)
 
-@export var speed = 10 # How fast the player will move (pixels/sec).
+@export var speed = 50 # How fast the player will move (pixels/sec).
+@export var acceleration = 0.1
 
 @export var move_left = "move_left"
 @export var move_right = "move_right"
@@ -17,6 +18,8 @@ signal laser_shot(laser_scene, location, angle)
 @export var power_up = false
 var default_shoot_cooldown_time = 0.5
 @export var shoot_cooldown_time = 0.5
+@export var invincibility_frame_time = 2
+@onready var invincible = false
 @export var damage = 100
 @export var HP = 1200
 @export var HP_max = 1200
@@ -55,7 +58,7 @@ func _ready():
 	#for item in available_powerups:		
 		#powerup_scene = item.instantiate()
 		#$PowerupContainer.add_child(powerup_scene)
-		
+	
 		
 
 func start(pos):
@@ -93,14 +96,14 @@ func handle_inputs():
 	rotation_angle += angle * 0.1
 	rotation = rotation_angle
 	direction = Vector2.from_angle(rotation_angle + (PI / 2))
-	velocity += direction * vel * speed
+	velocity += direction * vel * speed * acceleration
 
 	if Input.is_action_just_pressed("powerup"):
 		activate_powerup()
 
 
 func handle_collision(collision_info):
-	velocity = 0.5 * velocity.bounce(collision_info.get_normal())
+	velocity = velocity.bounce(collision_info.get_normal())
 	var object = collision_info.get_collider()
 	if object is Tesla:
 		object.take_damage(damage)
@@ -111,6 +114,10 @@ func handle_collision(collision_info):
 		object.take_damage(damage)
 		take_damage(object.damage)
 		print("i hit my other player")
+	if (object is SpaceJunk) || (object.get_parent() is SpaceJunk):
+		object.take_damage(damage)
+		take_damage(object.damage)
+		print("player hit spacejunk")
 
 func handle_animations():
 	if velocity == Vector2(0,0):
@@ -174,18 +181,20 @@ func shoot():
 		laser_shot.emit(laser_scene, gun3.global_position, rotation_angle)
 
 func take_damage(value):
-	HP -= value
-	print("Player HP:", HP)
-	if HP <= 0:
-		die()
-	else:
-		pass
-
-
+	if !invincible:
+		HP -= value
+		print("Player HP:", HP)
+		if HP <= 0:
+			die()
+		else:
+			invincible = true
+			get_tree().create_timer(invincibility_frame_time).timeout
+			invincible = false
 func die():
 	position = Vector2(get_parent().screen_size.x/2, get_parent().screen_size.y/2)
 	cur_angle = PI / 2
 	velocity = Vector2(0.0,0.0)
+	HP = HP_max
 	print("Player die")
 
 func wraparound():

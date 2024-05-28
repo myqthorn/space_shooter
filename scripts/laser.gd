@@ -26,9 +26,10 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 func _on_body_entered(body):
 	if body is Tesla:		
 		body.take_damage(damage)
-		$Sprite2D.hide()
-		await get_tree().create_timer(finish_sound_duration).timeout
-		queue_free()
+		die()
+	if body is SpaceJunk:
+		body.take_damage(damage)
+		die()
 
 func set_sound_to_straw():
 	sound = $Straw1
@@ -36,3 +37,8 @@ func set_sound_to_straw():
 
 func set_sound_to_chirp():
 	sound = $Chirp
+
+func die():
+	$Sprite2D.hide()
+	await get_tree().create_timer(finish_sound_duration).timeout
+	queue_free()

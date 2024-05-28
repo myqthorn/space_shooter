@@ -26,7 +26,12 @@ func _ready():
 	var pu = loose_power_up_scene.instantiate()
 	add_child(pu)
 	#pu.attained.connect(loose_pu_attained, player)
+	var canadian_space_x_scene = preload("res://scenes/canadian_space_x.tscn")
 	
+	var junk
+	for i in range(30):
+		junk = canadian_space_x_scene.instantiate()
+		add_child(junk)
 	
 	
 func _process(_delta):
